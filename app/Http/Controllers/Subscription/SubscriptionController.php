@@ -48,8 +48,8 @@ class SubscriptionController extends Controller
     public function premium()
     {
 
+        return view('web.subscription.premium');
 
-        echo 'ele é premium';
     }
 
 }
