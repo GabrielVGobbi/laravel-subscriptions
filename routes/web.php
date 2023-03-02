@@ -42,8 +42,11 @@ Route::middleware('auth')->group(function () {
         }
     );
 
+    Route::get('subscriptions/cancel', [App\Http\Controllers\Subscription\SubscriptionController::class, 'cancel'])->name('subscriptions.cancel');
+    Route::get('subscriptions/resume', [App\Http\Controllers\Subscription\SubscriptionController::class, 'resume'])->name('subscriptions.resume');
     Route::get('subscriptions', [App\Http\Controllers\Subscription\SubscriptionController::class, 'index'])->name('subscriptions');
     Route::post('subscriptions/{subscriptionId}/store', [App\Http\Controllers\Subscription\SubscriptionController::class, 'store'])->name('subscriptions.store');
     Route::get('subscriptions/{subscriptionId}/checkout', [App\Http\Controllers\Subscription\SubscriptionController::class, 'show'])->name('subscriptions.show');
     Route::get('subscriptions/premium', [App\Http\Controllers\Subscription\SubscriptionController::class, 'premium'])->name('subscriptions.premium')->middleware('subscribed');
+    Route::get('account', [App\Http\Controllers\Subscription\SubscriptionController::class, 'account'])->name('account');
 });

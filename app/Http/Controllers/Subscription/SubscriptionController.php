@@ -47,9 +47,32 @@ class SubscriptionController extends Controller
 
     public function premium()
     {
-
         return view('web.subscription.premium');
+    }
 
+    public function account()
+    {
+        $invoices = auth()->user()->invoices();
+
+        return view('web.subscription.account', [
+            'invoices' => $invoices,
+            'userIsSubscribed' => auth()->user()->subscribed('default'),
+            'userSubscription' => auth()->user()->subscription('default'),
+        ]);
+    }
+
+    public function cancel()
+    {
+        auth()->user()->subscription('default')->cancel();
+
+        return to_route('subscriptions');
+    }
+
+    public function resume()
+    {
+        auth()->user()->subscription('default')->resume();
+
+        return to_route('account');
     }
 
 }
