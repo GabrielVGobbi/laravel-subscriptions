@@ -20,15 +20,30 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::prefix('painel')->middleware(['auth', 'can:panel'])->group(function () {
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('painel.home');
+Route::middleware('auth')->group(function () {
 
     /*
     |--------------------------------------------------------------------------
-    | Usuários
+    | Painel
     |--------------------------------------------------------------------------
     */
-    Route::resource('users', App\Http\Controllers\Painel\ACL\UsersController::class);
-    Route::resource('permissions', App\Http\Controllers\Painel\ACL\PermissionsController::class);
-    Route::resource('roles', App\Http\Controllers\Painel\ACL\RolesController::class);
+    Route::middleware('can:panel')->prefix('painel')->group(
+        function () {
+            Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('painel.home');
+
+            /*
+            |--------------------------------------------------------------------------
+            | Usuários
+            |--------------------------------------------------------------------------
+            */
+            Route::resource('users', App\Http\Controllers\Painel\ACL\UsersController::class);
+            Route::resource('permissions', App\Http\Controllers\Painel\ACL\PermissionsController::class);
+            Route::resource('roles', App\Http\Controllers\Painel\ACL\RolesController::class);
+        }
+    );
+
+    Route::get('subscriptions', [App\Http\Controllers\Subscription\SubscriptionController::class, 'index'])->name('subscriptions');
+    Route::post('subscriptions/{subscriptionId}/store', [App\Http\Controllers\Subscription\SubscriptionController::class, 'store'])->name('subscriptions.store');
+    Route::get('subscriptions/{subscriptionId}/checkout', [App\Http\Controllers\Subscription\SubscriptionController::class, 'show'])->name('subscriptions.show');
+    Route::get('subscriptions/premium', [App\Http\Controllers\Subscription\SubscriptionController::class, 'premium'])->name('subscriptions.premium')->middleware('subscribed');
 });
