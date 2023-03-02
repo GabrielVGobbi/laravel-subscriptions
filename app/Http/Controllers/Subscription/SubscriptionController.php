@@ -23,7 +23,7 @@ class SubscriptionController extends Controller
     public function show($subscriptionId): View
     {
         $subscription = (object) [
-            'id' => 'price_1MhBKyC5C6Fi3gyRsuNCp8gT',
+            'id' => $subscriptionId,
             'name' => 'Plano Teste',
             'slug' => 'plano_teste',
             'price' => '200',

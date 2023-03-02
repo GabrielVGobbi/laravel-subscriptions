@@ -50,3 +50,10 @@ Route::middleware('auth')->group(function () {
     Route::get('subscriptions/premium', [App\Http\Controllers\Subscription\SubscriptionController::class, 'premium'])->name('subscriptions.premium')->middleware('subscribed');
     Route::get('account', [App\Http\Controllers\Subscription\SubscriptionController::class, 'account'])->name('account');
 });
+
+/*
+|--------------------------------------------------------------------------
+| WebHook
+|--------------------------------------------------------------------------
+*/
+Route::post('webhook/{provider}', [App\Http\Controllers\WebHookController::class, 'listener'])->name('webhook');

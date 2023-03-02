@@ -31,4 +31,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'stripe' => [
+        'key' => env('STRIPE_KEY', null),
+        'secret' => env('STRIPE_SECRET', null),
+        'webhook.secret' => env('STRIPE_WEBHOOK_SECRET', null)
+    ]
+
 ];

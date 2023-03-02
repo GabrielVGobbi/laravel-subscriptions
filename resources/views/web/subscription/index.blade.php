@@ -9,7 +9,7 @@
 
                     <div class="card-body">
 
-                        <a href="{{ route('subscriptions.show', 'price_1MhBKyC5C6Fi3gyRsuNCp8gT') }}" class="">
+                        <a href="{{ route('subscriptions.show', 'price_1MhILEC5C6Fi3gyRKdIIw4Ev') }}" class="">
                             Escolher
                         </a>
 
